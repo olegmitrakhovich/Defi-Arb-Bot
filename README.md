@@ -3,3 +3,5 @@ arbitrage bot, looks for prices differences on uniswap and kyber. Uses flashloan
 
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install -y nodejs
+
+truffle migrate --network mainnet --reset
