@@ -79,7 +79,7 @@ module.exports = {
       //gas: 8500000,
       //gas: 12400000,
       //gas: 2000000,
-      gasPrice: 80000000000
+      gasPrice: 92000000000
     },
 
     // Useful for private networks
