@@ -89,9 +89,9 @@ const init = async () => {
       const daiFromUniswap = web3.utils.toBN(amountsDai[1][0].raw.toString());
 
       ////////////////////////////////////////////////////////////////////////////////////////
-      const [gasPriceTest, gasCost] = await Promise.all([
+      const [gasPriceTest] = await Promise.all([
         web3.eth.getGasPrice(),
-        tx.estimateGas({from: admin}),
+        //tx.estimateGas({from: admin}),
       ]);
       console.log("<------------------Estimated Gas Price----------------------->");
       console.log(web3.utils.toBN(gasPriceTest));
