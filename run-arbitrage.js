@@ -28,14 +28,14 @@ const init = async () => {
     Flashloan.abi,
     Flashloan.networks[networkId].address
   );
-  
+
   let ethPrice;
   const updateEthPrice = async () => {
     const results = await kyber
       .methods
       .getExpectedRate(
-        '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 
-        addresses.tokens.dai, 
+        '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+        addresses.tokens.dai,
         1
       )
       .call();
@@ -64,10 +64,10 @@ const init = async () => {
         kyber
           .methods
           .getExpectedRate(
-            addresses.tokens.dai, 
-            '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 
+            addresses.tokens.dai,
+            '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
             AMOUNT_DAI_WEI
-          ) 
+          )
           .call(),
         daiWeth.getOutputAmount(new TokenAmount(dai, AMOUNT_DAI_WEI)),
       ]);
@@ -78,10 +78,10 @@ const init = async () => {
         kyber
           .methods
           .getExpectedRate(
-            '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 
-            addresses.tokens.dai, 
+            '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+            addresses.tokens.dai,
             ethFromUniswap.toString()
-          ) 
+          )
           .call(),
         daiWeth.getOutputAmount(new TokenAmount(weth, ethFromKyber.toString())),
       ]);
@@ -93,8 +93,8 @@ const init = async () => {
 
       if(daiFromUniswap.gt(AMOUNT_DAI_WEI)) {
         const tx = flashloan.methods.initiateFlashloan(
-          addresses.dydx.solo, 
-          addresses.tokens.dai, 
+          addresses.dydx.solo,
+          addresses.tokens.dai,
           AMOUNT_DAI_WEI,
           DIRECTION.KYBER_TO_UNISWAP
         );
@@ -103,6 +103,8 @@ const init = async () => {
           tx.estimateGas({from: admin}),
         ]);
 
+        console.log("<------------------Estimated Gas Pricee----------------------->");
+        console.log(web3.utils.toBN(gasPrice));  
         const txCost = web3.utils.toBN(gasCost).mul(web3.utils.toBN(gasPrice)).mul(ethPrice);
         const profit = daiFromUniswap.sub(AMOUNT_DAI_WEI).sub(txCost);
 
@@ -124,8 +126,8 @@ const init = async () => {
 
       if(daiFromKyber.gt(AMOUNT_DAI_WEI)) {
         const tx = flashloan.methods.initiateFlashloan(
-          addresses.dydx.solo, 
-          addresses.tokens.dai, 
+          addresses.dydx.solo,
+          addresses.tokens.dai,
           AMOUNT_DAI_WEI,
           DIRECTION.UNISWAP_TO_KYBER
         );
