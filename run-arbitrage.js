@@ -88,6 +88,15 @@ const init = async () => {
       const daiFromKyber = ethFromUniswap.mul(web3.utils.toBN(amountsDai[0].expectedRate)).div(ONE_WEI);
       const daiFromUniswap = web3.utils.toBN(amountsDai[1][0].raw.toString());
 
+      ////////////////////////////////////////////////////////////////////////////////////////
+      const [gasPriceTest, gasCost] = await Promise.all([
+        web3.eth.getGasPrice(),
+        tx.estimateGas({from: admin}),
+      ]);
+      console.log("<------------------Estimated Gas Price----------------------->");
+      console.log(web3.utils.toBN(gasPriceTest));
+      ////////////////////////////////////////////////////////////////////////////////////////
+
       console.log(`Kyber -> Uniswap. Dai input / output: ${web3.utils.fromWei(AMOUNT_DAI_WEI.toString())} / ${web3.utils.fromWei(daiFromUniswap.toString())}`);
       console.log(`Uniswap -> Kyber. Dai input / output: ${web3.utils.fromWei(AMOUNT_DAI_WEI.toString())} / ${web3.utils.fromWei(daiFromKyber.toString())}`);
 
@@ -103,8 +112,8 @@ const init = async () => {
           tx.estimateGas({from: admin}),
         ]);
 
-        console.log("<------------------Estimated Gas Pricee----------------------->");
-        console.log(web3.utils.toBN(gasPrice));  
+        console.log("<------------------Using Gas Price:----------------------->");
+        console.log(web3.utils.toBN(gasPrice));
         const txCost = web3.utils.toBN(gasCost).mul(web3.utils.toBN(gasPrice)).mul(ethPrice);
         const profit = daiFromUniswap.sub(AMOUNT_DAI_WEI).sub(txCost);
 
