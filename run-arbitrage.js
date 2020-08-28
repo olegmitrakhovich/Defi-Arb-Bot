@@ -94,7 +94,7 @@ const init = async () => {
         //tx.estimateGas({from: admin}),
       ]);
       console.log("<------------------Estimated Gas Price----------------------->");
-      console.log(web3.utils.toBN(gasPriceTest));
+      console.log(gasPriceTest);
       ////////////////////////////////////////////////////////////////////////////////////////
 
       console.log(`Kyber -> Uniswap. Dai input / output: ${web3.utils.fromWei(AMOUNT_DAI_WEI.toString())} / ${web3.utils.fromWei(daiFromUniswap.toString())}`);
