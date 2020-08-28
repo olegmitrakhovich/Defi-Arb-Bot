@@ -6,7 +6,7 @@ const { mainnet: addresses } = require('./addresses');
 const Flashloan = require('./build/contracts/Flashloan.json');
 
 const web3 = new Web3(
-  new Web3.providers.WebsocketProvider(process.env.INFURA_URL)
+  new Web3.providers.WebsocketProvider(process.env.QUIK_URL)
 );
 const { address: admin } = web3.eth.accounts.wallet.add(process.env.PRIVATE_KEY);
 
