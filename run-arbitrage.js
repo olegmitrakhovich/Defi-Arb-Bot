@@ -89,12 +89,12 @@ const init = async () => {
       const daiFromUniswap = web3.utils.toBN(amountsDai[1][0].raw.toString());
 
       ////////////////////////////////////////////////////////////////////////////////////////
-      const [gasPriceTest] = await Promise.all([
-        web3.eth.getGasPrice(),
+      //const [gasPriceTest] = await Promise.all([
+      //  web3.eth.getGasPrice(),
         //tx.estimateGas({from: admin}),
-      ]);
-      console.log("<------------------Estimated Gas Price----------------------->");
-      console.log(gasPriceTest);
+      //]);
+      //console.log("<------------------Estimated Gas Price----------------------->");
+      //console.log(gasPriceTest);
       ////////////////////////////////////////////////////////////////////////////////////////
 
       console.log(`Kyber -> Uniswap. Dai input / output: ${web3.utils.fromWei(AMOUNT_DAI_WEI.toString())} / ${web3.utils.fromWei(daiFromUniswap.toString())}`);
